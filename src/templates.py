@@ -1,13 +1,13 @@
-from grimoire.templates import link
+from grimoire.templates import default_page
 from grimoire.utils import make_decorator
-from hype import Div, P, Ul, Li
+from hype import Div, P
 
 
 @make_decorator
+@default_page("Grimoire Story")
 def template(fn, state, *opts):
     paragraphs, options, state = fn(state, *opts)
     content = Div(
         *[P(p) for p in paragraphs],
-        Ul(*[Li(link(o[0], o[1])) for o in options])
     )
-    return content, state
+    return content, options, state
