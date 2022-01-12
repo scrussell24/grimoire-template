@@ -9,10 +9,10 @@ app = Grimoire(state=State)
 
 @app.page(start=True)
 @template
-def start(state, second):
+def start(state, second, third):
     return (
         ["Hello, Scott!"],
-        [("Go to second page", second)],
+        [("Go to second page", second), ("Go to third page", third)],
         state
     )
 
@@ -21,7 +21,16 @@ def start(state, second):
 @template
 def second(state):
     return (
-        ["I'm the second page."],
+        ["I'm the second page.", f"{state.foo}"],
+        [],
+        state
+    )
+
+@app.page()
+@template
+def third(state):
+    return (
+        ["I'm the third page.", f"{state.bar}"],
         [],
         state
     )
